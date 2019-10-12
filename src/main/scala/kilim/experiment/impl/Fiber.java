@@ -17,10 +17,10 @@ class Fiber {
 
     public void suspend() {
         ++pc;
-        Runner.scheduler.blockCurrentTask();
+        Runner.dispatcher.blockCurrentTask();
     }
 
     public void end() {
-        Runner.scheduler.endFiber();
+        Runner.dispatcher.endFiber();
     }
 }

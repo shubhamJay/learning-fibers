@@ -13,6 +13,10 @@ class TestTask {
         switch (pc) {
             case 1:
                 System.out.println("blocking - 1 | " + fiber.name);
+                // what about state?
+                // try using continuation and  state machines to resume.
+                //rename to dispatcher
+
                 fiber.suspend(); // could be sleep too
             case 2:
                 System.out.println("blocking - 2 | " + fiber.name);
