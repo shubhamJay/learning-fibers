@@ -2,25 +2,31 @@ package kilim.experiment.impl;
 
 class Fiber {
 
-    private TestTask task;
+    private Task task;
     Integer pc = 1;
     String name;
 
-    public Fiber(TestTask task, String name) {
+    public Fiber(Task task, String name) {
         this.task = task;
         this.name = name;
     }
 
     public void run() {
-        task.run(pc);
+        try {
+            task.run(pc);
+        } catch (Exception e) {
+            System.out.println("thrown exception : " + e.getMessage());
+        }
     }
 
     public void suspend() {
         ++pc;
-        Runner.dispatcher.blockCurrentTask();
+        Runner.dispatcher.submit(this);
     }
 
-    public void end() {
-        Runner.dispatcher.endFiber();
+    // use this to suspend.
+    void schedule(Integer millis) {
+        ++pc;
+        Runner.dispatcher.schedule(this, millis);
     }
 }

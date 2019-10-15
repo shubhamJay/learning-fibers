@@ -1,33 +1,20 @@
 package kilim.experiment.impl;
 
-import java.util.ArrayList;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 class Dispatcher {
-
-    private ArrayList<Fiber> workQueue = new ArrayList<>(10);
+    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
     void dispatch(Fiber fiber) {
-        workQueue.add(fiber);
+        executor.execute(fiber::run);
     }
 
-    void run() {
-        if (workQueue.isEmpty()) {
-            System.out.println("end of execution");
-        } else {
-            Fiber currentFiber = workQueue.get(0);
-            currentFiber.run();
-        }
+    void submit(Fiber fiber) {
+        executor.submit(fiber::run);
     }
 
-    void blockCurrentTask() {
-        Fiber currentFiber = workQueue.get(0);
-        workQueue.remove(0);
-        dispatch(currentFiber);
-        run();
-    }
-
-    public void endFiber() {
-        workQueue.remove(0);
-        run();
+    void schedule(Fiber fiber, Integer millis) {
+        executor.schedule(fiber::run, millis, TimeUnit.MILLISECONDS);
     }
 }
