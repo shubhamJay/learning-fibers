@@ -1,4 +1,4 @@
-package kilim.experiment.impl;
+package fiber.minimized.impl;
 
 class Fiber {
 

@@ -1,4 +1,4 @@
-package kilim.experiment.impl;
+package fiber.minimized.impl;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
