@@ -12,7 +12,7 @@ public class ServerApp {
 
     static AtomicInteger count = new AtomicInteger(0);
 
-    private static Dispatcher dispatcher = new Dispatcher();
+    private static Dispatcher dispatcher = Dispatcher.getCurrentDispatcher();
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8500), 0);

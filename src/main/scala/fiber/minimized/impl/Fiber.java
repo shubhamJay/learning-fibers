@@ -21,12 +21,12 @@ class Fiber {
 
     public void suspend() {
         ++pc;
-        Runner.dispatcher.submit(this);
+        Dispatcher.getCurrentDispatcher().submit(this::run);
     }
 
     // use this to suspend.
     void schedule(Integer millis) {
         ++pc;
-        Runner.dispatcher.schedule(this, millis);
+        Dispatcher.getCurrentDispatcher().schedule(this::run, millis);
     }
 }

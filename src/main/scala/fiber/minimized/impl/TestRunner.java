@@ -1,7 +1,7 @@
 package fiber.minimized.impl;
 
-public class Runner {
-    static Dispatcher dispatcher = new Dispatcher();
+public class TestRunner {
+    static Dispatcher dispatcher = Dispatcher.getCurrentDispatcher();
 
     public static void main(String[] args) throws InterruptedException {
         // add tasks
