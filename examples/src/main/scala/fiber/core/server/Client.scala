@@ -1,4 +1,4 @@
-package fiber.examples
+package fiber.core.server
 
 import requests.Response
 

@@ -1,10 +1,12 @@
-package fiber.examples;
+package fiber.core;
 
-class Fiber {
+public class Fiber {
 
     private Task task;
     Integer pc = 1;
-    String name;
+    public String name;
+
+    private Dispatcher dispatcher = Dispatcher.getCurrentDispatcher();
 
     public Fiber(Task task, String name) {
         this.task = task;
@@ -21,12 +23,12 @@ class Fiber {
 
     public void suspend() {
         ++pc;
-        Dispatcher.getCurrentDispatcher().submit(this::run);
+        dispatcher.submit(this::run);
     }
 
     // use this to suspend.
-    void schedule(Integer millis) {
+    public void sleep(Integer millis) {
         ++pc;
-        Dispatcher.getCurrentDispatcher().schedule(this::run, millis);
+        dispatcher.schedule(this::run, millis);
     }
 }

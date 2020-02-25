@@ -1,18 +1,18 @@
-package fiber.examples;
+package fiber.core;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-class Dispatcher {
-    private static Dispatcher dispatcher = new Dispatcher();
+public class Dispatcher {
+    private static Dispatcher defaultDispatcher = new Dispatcher();
 
-    static Dispatcher getCurrentDispatcher() {
-        return dispatcher;
+    public static Dispatcher getCurrentDispatcher() {
+        return defaultDispatcher;
     }
 
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
-    void dispatch(Fiber fiber) {
+    public void dispatch(Fiber fiber) {
         executor.execute(fiber::run);
     }
 

@@ -1,4 +1,6 @@
-package fiber.examples;
+package fiber.core.test;
+
+import fiber.core.Dispatcher;
 
 public class TestRunner {
     static Dispatcher dispatcher = Dispatcher.getCurrentDispatcher();

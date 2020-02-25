@@ -1,8 +1,9 @@
-package fiber.examples;
+package fiber.core.server;
 
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
+import fiber.core.Dispatcher;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
