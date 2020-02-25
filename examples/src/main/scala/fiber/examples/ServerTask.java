@@ -1,4 +1,4 @@
-package fiber.minimized.impl;
+package fiber.examples;
 
 import com.sun.net.httpserver.HttpExchange;
 

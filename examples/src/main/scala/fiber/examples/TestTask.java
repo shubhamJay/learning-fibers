@@ -1,4 +1,4 @@
-package fiber.minimized.impl;
+package fiber.examples;
 
 class TestTask implements Task {
     Fiber fiber;

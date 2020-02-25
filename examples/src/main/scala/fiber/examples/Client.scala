@@ -1,8 +1,8 @@
-package fiber.minimized.impl
+package fiber.examples
 
 import requests.Response
 
-object ServerClient1 extends App {
+object Client extends App {
 
   import scala.concurrent.ExecutionContext.Implicits._
   import scala.concurrent.duration.DurationInt
