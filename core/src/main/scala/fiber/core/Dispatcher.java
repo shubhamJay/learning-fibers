@@ -10,6 +10,7 @@ public class Dispatcher {
         return defaultDispatcher;
     }
 
+    // Threads are the underlying Concurrency primitive on which fibers are scheduled.
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
     public void dispatch(Fiber fiber) {

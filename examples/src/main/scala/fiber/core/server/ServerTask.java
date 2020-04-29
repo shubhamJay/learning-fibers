@@ -11,6 +11,7 @@ class ServerTask implements Task {
     private final HttpExchange exchange;
     Fiber fiber;
 
+    // to count how many ServerTasks are created
     static Integer count = 0;
 
     ServerTask(HttpExchange exchange) {
@@ -21,22 +22,27 @@ class ServerTask implements Task {
     @Override
     public void run(Integer pc) throws IOException {
 
-        /**
+        // Code simulates a request handler which needs to be blocked before giving
+        // response to the request.
+        /** ACTUAL CODE
          *  System.out.println("blocking - 1 | " + fiber.name);
-         * Thread.sleep(1000)
+         * fiber.sleep(1000)
          * System.out.println("blocking - 2 | " + fiber.name);
-         * Thread.sleep(1000)
+         * fiber.sleep(1000)
          * completeRequest()
          */
 
+        // COMPILED CODE
         switch (pc) {
             case 1:
                 System.out.println("blocking - 1 | " + fiber.name);
-                fiber.sleep(1000); // Thread.sleep
+                // place to save the state
+                fiber.sleep(1000); // suspending call
                 return;
             case 2:
                 System.out.println("blocking - 2 | " + fiber.name);
-                fiber.sleep(1000); // Thread.sleep
+                // place to save the state
+                fiber.sleep(1000); // suspending call
                 return;
             default:
                 completeRequest();

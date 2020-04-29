@@ -2,8 +2,8 @@ package fiber.core;
 
 public class Fiber {
 
-    private Task task;
-    Integer pc = 1;
+    private Task task; // the task to execute on the fiber
+    Integer executionCounter = 1; // place to resume execution from
     public String name;
 
     private Dispatcher dispatcher = Dispatcher.getCurrentDispatcher();
@@ -15,20 +15,20 @@ public class Fiber {
 
     public void run() {
         try {
-            task.run(pc);
+            task.run(executionCounter);
         } catch (Exception e) {
             System.out.println("thrown exception : " + e.getMessage());
         }
     }
 
     public void suspend() {
-        ++pc;
+        ++executionCounter;
         dispatcher.submit(this::run);
     }
 
     // use this to suspend.
     public void sleep(Integer millis) {
-        ++pc;
+        ++executionCounter;
         dispatcher.schedule(this::run, millis);
     }
 }
