@@ -3,6 +3,8 @@ package fiber.core.test;
 import fiber.core.Fiber;
 import fiber.core.Task;
 
+import java.io.IOException;
+
 class TestTask implements Task {
     Fiber fiber;
 
@@ -10,8 +12,13 @@ class TestTask implements Task {
         this.fiber = new Fiber(this, "fiber of Task: " + taskNumber);
     }
 
+    @Override
+    public Fiber getFiber() {
+        return fiber;
+    }
+    
     // Should fiber be injected or only PC.
-    public void run(Integer pc) {
+    public void run(int pc) {
 
         System.out.println(Thread.currentThread().getName() + " ==== " + pc);
 

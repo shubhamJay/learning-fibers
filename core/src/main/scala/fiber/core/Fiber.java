@@ -23,7 +23,6 @@ public class Fiber {
 
     public void suspend() {
         ++executionCounter;
-        dispatcher.submit(this::run);
     }
 
     // use this to suspend.

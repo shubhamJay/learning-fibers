@@ -6,21 +6,28 @@ import fiber.core.Task;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class ServerTask implements Task {
     private final HttpExchange exchange;
-    Fiber fiber;
+    private Fiber fiber;
 
     // to count how many ServerTasks are created
-    static Integer count = 0;
+    static AtomicInteger count = new AtomicInteger(0);
 
     ServerTask(HttpExchange exchange) {
         this.exchange = exchange;
-        this.fiber = new Fiber(this, "fiber of Task " + ++count);
+        fiber = new Fiber(this, "fiber of Server Task " + count.incrementAndGet());
     }
 
     @Override
-    public void run(Integer pc) throws IOException {
+    public Fiber getFiber() {
+        return fiber;
+    }
+
+
+    @Override
+    public void run(int pc) throws IOException {
 
         // Code simulates a request handler which needs to be blocked before giving
         // response to the request.

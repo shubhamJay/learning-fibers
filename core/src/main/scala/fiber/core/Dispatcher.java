@@ -17,11 +17,15 @@ public class Dispatcher {
         executor.execute(fiber::run);
     }
 
-    void submit(Runnable task) {
+    public void submit(Runnable task) {
         executor.submit(task);
     }
 
     void schedule(Runnable task, Integer millis) {
         executor.schedule(task, millis, TimeUnit.MILLISECONDS);
+    }
+
+    public void shutdown() {
+        executor.shutdownNow();
     }
 }

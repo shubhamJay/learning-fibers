@@ -23,8 +23,9 @@ public class ServerApp {
     }
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
+
         ServerTask serverTask = new ServerTask(exchange);
-        dispatcher.dispatch(serverTask.fiber);  // schedules the task (fiber for execution)
+        dispatcher.dispatch(serverTask.getFiber());  // schedules the task (fiber for execution)
         System.out.println("request scheduled " + count.addAndGet(1));
     }
 }
