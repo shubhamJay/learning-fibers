@@ -16,7 +16,7 @@ class ClientApp {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         for (int i = 0; i < 3; i++) {
-            Dispatcher.getCurrentDispatcher().dispatch(new ClientTask(AsynchronousSocketChannel.open()).getFiber());
+            Dispatcher.getCurrentDispatcher().dispatch(new ClientTask("localhost", 8500).getFiber());
         }
         Thread.sleep(100000);
     }
@@ -25,14 +25,17 @@ class ClientApp {
 
 class ClientTask implements Task {
 
+    private String host;
+    private int port;
     private final AsynchronousSocketChannel channel;
-    Fiber fiber;
+    private Fiber fiber;
 
-    public ClientTask(AsynchronousSocketChannel channel) {
-        this.channel = channel;
+    public ClientTask(String host, int port) throws IOException {
+        this.host = host;
+        this.port = port;
+        this.channel = AsynchronousSocketChannel.open();
         this.fiber = new Fiber(this, "client Fiber");
     }
-
 
     @Override
     public Fiber getFiber() {
@@ -48,7 +51,7 @@ class ClientTask implements Task {
         switch (pc) {
             case 1:
                 channel.connect(
-                        new InetSocketAddress("localhost", 8500),
+                        new InetSocketAddress(host, port),
                         null,
                         new CompletionHandler<Void, Void>() {
                             @Override
