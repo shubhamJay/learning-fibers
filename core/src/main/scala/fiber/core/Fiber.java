@@ -17,7 +17,7 @@ public class Fiber {
         try {
             task.run(executionCounter);
         } catch (Exception e) {
-            System.out.println("thrown exception : " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

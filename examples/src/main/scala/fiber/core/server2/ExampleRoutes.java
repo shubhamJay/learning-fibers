@@ -24,19 +24,17 @@ public class ExampleRoutes extends RouteTask {
         return fiber;
     }
 
-    ByteBuffer byteBuffer = ByteBuffer.allocate(1000); // request content
-    String[] requestBody = new String[1]; // todo: fix this;
+
+    ByteBuffer request = ByteBuffer.allocate(1000); // request content
 
     @Override
     public void run(int pc) throws IOException {
 
         switch (pc) {
             case 1:
-                channel.read(byteBuffer, null, new CompletionHandler<>() {
+                channel.read(request, null, new CompletionHandler<>() {
                     @Override
                     public void completed(Integer result, Object attachment) {
-                        System.out.println(fiber.name + " completed reading ");
-                        requestBody[0] = new String(byteBuffer.array());
                         Dispatcher.getCurrentDispatcher().submit(fiber::run);
                     }
 
@@ -54,7 +52,7 @@ public class ExampleRoutes extends RouteTask {
                 return;
 
             case 2:
-                System.out.println(fiber.name + requestBody[0]);
+                System.out.println(fiber.name + new String(request.array()));
 
                 channel.write(ByteBuffer.wrap("Hello".getBytes()), null, new CompletionHandler<>() {
 
@@ -65,11 +63,7 @@ public class ExampleRoutes extends RouteTask {
 
                     @Override
                     public void failed(Throwable exc, Object attachment) {
-                        try {
-                            channel.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        Dispatcher.getCurrentDispatcher().submit(fiber::run);
                     }
                 });
                 fiber.suspend();
