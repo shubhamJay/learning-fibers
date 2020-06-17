@@ -40,11 +40,7 @@ public class ExampleRoutes extends RouteTask {
 
                     @Override
                     public void failed(Throwable exc, Object attachment) {
-                        try {
-                            channel.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        System.out.println("failed reading");
                     }
                 });
                 System.out.println(fiber.name + " suspending 1");
@@ -52,6 +48,7 @@ public class ExampleRoutes extends RouteTask {
                 return;
 
             case 2:
+                // consume bytes and perform sever actions
                 System.out.println(fiber.name + new String(request.array()));
 
                 channel.write(ByteBuffer.wrap("Hello".getBytes()), null, new CompletionHandler<>() {
@@ -63,7 +60,7 @@ public class ExampleRoutes extends RouteTask {
 
                     @Override
                     public void failed(Throwable exc, Object attachment) {
-                        Dispatcher.getCurrentDispatcher().submit(fiber::run);
+                        System.out.println("failed writing");
                     }
                 });
                 fiber.suspend();

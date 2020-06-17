@@ -45,6 +45,7 @@ class ClientTask implements Task {
     // todo: check how state can be managed inside the suspending function (should not need a external buffer to read)
     ByteBuffer buffer = ByteBuffer.allocate(1000);
 
+    // todo: the completion handlers are almost same in all the places.
     @Override
     public void run(int pc) throws IOException {
 
@@ -85,6 +86,7 @@ class ClientTask implements Task {
                         });
                 fiber.suspend();
                 return;
+
             case 3:
                 channel.read(buffer,
                         60,
@@ -104,6 +106,7 @@ class ClientTask implements Task {
                         });
                 fiber.suspend();
                 return;
+
             case 4:
                 System.out.println("+" + new String(buffer.array()));
                 channel.close();
