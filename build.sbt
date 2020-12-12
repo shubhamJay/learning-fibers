@@ -4,7 +4,7 @@ name := "kilim-experiment"
 
 version := "0.1"
 
-scalaVersion := "2.13.0"
+scalaVersion := "2.13.4"
 
 lazy val core = project
   .in(file("core"))
@@ -16,4 +16,3 @@ lazy val core = project
 lazy val examples = project
   .in(file("examples"))
   .dependsOn(core)
-

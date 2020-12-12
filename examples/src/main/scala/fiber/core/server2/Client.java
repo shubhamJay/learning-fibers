@@ -15,7 +15,8 @@ import java.util.concurrent.TimeUnit;
 class ClientApp {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
+            Thread.sleep(1000);
             Dispatcher.getCurrentDispatcher().dispatch(new ClientTask("localhost", 8500).getFiber());
         }
         Thread.sleep(100000);
@@ -70,7 +71,7 @@ class ClientTask implements Task {
 
             case 2:
                 channel.write(
-                        ByteBuffer.wrap("hello from ".getBytes()),
+                        ByteBuffer.wrap("hello from client ".repeat(100).getBytes()),
                         null,
                         new CompletionHandler<Integer, Void>() {
                             @Override
@@ -108,7 +109,7 @@ class ClientTask implements Task {
                 return;
 
             case 4:
-                System.out.println("+" + new String(buffer.array()));
+                System.out.println("res :" + new String(buffer.array()));
                 channel.close();
         }
     }

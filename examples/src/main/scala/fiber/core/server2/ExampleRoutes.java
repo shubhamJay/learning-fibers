@@ -43,7 +43,7 @@ public class ExampleRoutes extends RouteTask {
                         System.out.println("failed reading");
                     }
                 });
-                System.out.println(fiber.name + " suspending 1");
+                System.out.println(fiber.name + " suspension number 1");
                 fiber.suspend();
                 return;
 
@@ -51,7 +51,7 @@ public class ExampleRoutes extends RouteTask {
                 // consume bytes and perform sever actions
                 System.out.println(fiber.name + new String(request.array()));
 
-                channel.write(ByteBuffer.wrap("Hello".getBytes()), null, new CompletionHandler<>() {
+                channel.write(ByteBuffer.wrap("Hello from server ".repeat(100).getBytes()), null, new CompletionHandler<>() {
 
                     @Override
                     public void completed(Integer result, Object attachment) {
@@ -63,6 +63,7 @@ public class ExampleRoutes extends RouteTask {
                         System.out.println("failed writing");
                     }
                 });
+                System.out.println(fiber.name + " suspension number 1");
                 fiber.suspend();
                 return;
             case 3:
