@@ -1,4 +1,4 @@
-package fiber.core.http;
+package fiber.http.framework;
 
 import fiber.core.Task;
 

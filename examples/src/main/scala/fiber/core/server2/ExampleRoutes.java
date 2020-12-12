@@ -2,7 +2,7 @@ package fiber.core.server2;
 
 import fiber.core.Dispatcher;
 import fiber.core.Fiber;
-import fiber.core.http.RouteTask;
+import fiber.http.framework.RouteTask;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
