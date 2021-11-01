@@ -49,7 +49,6 @@ class ClientTask implements Task {
     // todo: the completion handlers are almost same in all the places.
     @Override
     public void run(int pc) throws IOException {
-
         switch (pc) {
             case 1:
                 channel.connect(

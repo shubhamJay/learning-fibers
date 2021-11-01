@@ -16,8 +16,6 @@ public class HttpServer {
     public HttpServer(int port, RouteFactory factory) {
         this.port = port;
         this.factory = factory;
-        Thread thread = new Thread();
-        thread.setDaemon(true);
     }
 
     public void start() throws IOException {
@@ -37,6 +35,7 @@ public class HttpServer {
                 System.out.println(exc.getMessage());
             }
         });
+        Thread.currentThread().setDaemon(true);
     }
 
     public void stop() throws IOException {

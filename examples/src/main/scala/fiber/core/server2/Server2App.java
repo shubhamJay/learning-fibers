@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.channels.AsynchronousSocketChannel;
 
 public class Server2App {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         HttpServer httpServer = new HttpServer(8500, new RouteFactory() {
             @Override
             public RouteTask getTask(AsynchronousSocketChannel channel) {
@@ -18,6 +18,7 @@ public class Server2App {
         httpServer.start();
         System.out.println("server started");
 
-        Thread.sleep(1000000); // todo: remove this. See if deamon threads help
+
+//        Thread.sleep(1000000); // todo: remove this. See if deamon threads help
     }
 }

@@ -4,7 +4,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Dispatcher {
-    private static Dispatcher defaultDispatcher = new Dispatcher();
+    private static final Dispatcher defaultDispatcher = new Dispatcher();
 
     public static Dispatcher getCurrentDispatcher() {
         return defaultDispatcher;
